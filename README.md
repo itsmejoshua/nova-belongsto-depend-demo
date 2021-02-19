@@ -4,7 +4,7 @@
 -   php 7.4
 -   MySQL
 
-## Install Fuhrpark
+## Install Nova Belongsto Depend Demo
 
     git clone git@github.com:orlyapps/nova-belongsto-depend-demo.git nova-belongsto-depend-demo
     cd ./nova-belongsto-depend-demo
