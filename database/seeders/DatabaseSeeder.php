@@ -18,6 +18,9 @@ class DatabaseSeeder extends Seeder
             CountrySeeder::class,
             StateSeeder::class,
             CitySeeder::class,
+            ClassificationSeeder::class,
+            BrandSeeder::class,
+            VehicleModelSeeder::class,
         ]);
     }
 }
