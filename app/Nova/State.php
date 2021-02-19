@@ -10,12 +10,7 @@ use Laravel\Nova\Fields\Text;
 
 class State extends Resource
 {
-    /**
-     * Indicates if the resource should be displayed in the sidebar.
-     *
-     * @var bool
-     */
-    public static $displayInNavigation = false;
+    public static $group = 'Models';
 
     /**
      * The model the resource corresponds to.

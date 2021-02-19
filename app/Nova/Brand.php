@@ -11,6 +11,8 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Brand extends Resource
 {
+    public static $group = 'Models';
+
     /**
      * The model the resource corresponds to.
      *

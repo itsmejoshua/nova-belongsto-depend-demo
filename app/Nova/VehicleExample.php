@@ -3,27 +3,26 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Text;
+use Orlyapps\NovaBelongsToDepend\NovaBelongsToDepend;
 
-class City extends Resource
+class VehicleExample extends Resource
 {
-    public static $group = 'Models';
+    public static $group = 'Examples';
 
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\City::class;
+    public static $model = \App\Models\VehicleExample::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'name';
+    public static $title = 'id';
 
     /**
      * The columns that should be searched.
@@ -31,7 +30,7 @@ class City extends Resource
      * @var array
      */
     public static $search = [
-        'name',
+        'id',
     ];
 
     /**
@@ -44,9 +43,18 @@ class City extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make('Name', 'name')
-                ->sortable(),
-            BelongsTo::make('State')
+            NovaBelongsToDepend::make('Classification', 'classification')
+                ->options(\App\Models\Classification::all()),
+            NovaBelongsToDepend::make('Brand', 'brand')
+                ->optionsResolve(function ($classification) {
+                    return $classification->brands()->get(['brands.id', 'brands.name']);
+                })
+                ->dependsOn('classification'),
+            NovaBelongsToDepend::make('Model', 'model', VehicleModel::class)
+                ->optionsResolve(function ($brand) {
+                    return $brand->models()->get(['vehicle_models.id', 'vehicle_models.name']);
+                })
+                ->dependsOn('brand')
                 ->sortable(),
         ];
     }

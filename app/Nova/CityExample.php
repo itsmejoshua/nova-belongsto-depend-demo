@@ -8,6 +8,8 @@ use Orlyapps\NovaBelongsToDepend\NovaBelongsToDepend;
 
 class CityExample extends Resource
 {
+    public static $group = 'Examples';
+
     /**
      * The model the resource corresponds to.
      *
