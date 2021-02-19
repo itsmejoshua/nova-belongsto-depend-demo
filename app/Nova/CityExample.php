@@ -3,32 +3,24 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Text;
+use Orlyapps\NovaBelongsToDepend\NovaBelongsToDepend;
 
-class City extends Resource
+class CityExample extends Resource
 {
-    /**
-     * Indicates if the resource should be displayed in the sidebar.
-     *
-     * @var bool
-     */
-    public static $displayInNavigation = false;
-
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\City::class;
+    public static $model = \App\Models\CityExample::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'name';
+    public static $title = 'id';
 
     /**
      * The columns that should be searched.
@@ -36,7 +28,7 @@ class City extends Resource
      * @var array
      */
     public static $search = [
-        'name',
+        'id',
     ];
 
     /**
@@ -49,9 +41,20 @@ class City extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
-            Text::make('Name', 'name')
+            NovaBelongsToDepend::make('Country')
+                ->options(\App\Models\Country::all())
                 ->sortable(),
-            BelongsTo::make('State')
+            NovaBelongsToDepend::make('State')
+                ->optionsResolve(function ($country) {
+                    return $country->states()->get(['id', 'name']);
+                })
+                ->dependsOn('country')
+                ->sortable(),
+            NovaBelongsToDepend::make('City')
+                ->optionsResolve(function ($state) {
+                    return $state->cities()->get(['id', 'name']);
+                })
+                ->dependsOn('state')
                 ->sortable(),
         ];
     }
