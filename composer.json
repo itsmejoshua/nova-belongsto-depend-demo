@@ -11,6 +11,10 @@
         {
             "type": "composer",
             "url": "https://nova.laravel.com"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/NovaBelongstoDepend"
         }
     ],
     "require": {
@@ -20,7 +24,8 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/nova": "~3.0",
-        "laravel/tinker": "^2.5"
+        "laravel/tinker": "^2.5",
+        "orlyapps/nova-belongsto-depend": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
