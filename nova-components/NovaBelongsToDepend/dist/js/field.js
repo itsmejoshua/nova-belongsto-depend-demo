@@ -1053,13 +1053,30 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             }).authorizedToCreate;
         }
     },
+
     beforeDestroy: function beforeDestroy() {
-        Nova.$off("nova-belongsto-depend-" + this.field.dependsOn);
+        if (this.field.dependsOn) {
+
+            var $busEvents = [];
+
+            for (var i = 0; i < this.field.dependsOn.length; i++) {
+                $busEvents.push("depend-field-" + this.field.dependsOn[i]);
+            }
+
+            Nova.$off($busEvents);
+        }
     },
     created: function created() {
         var _this2 = this;
 
         if (this.field.dependsOn) {
+
+            var $busEvents = [];
+
+            for (var i = 0; i < this.field.dependsOn.length; i++) {
+                $busEvents.push("depend-field-" + this.field.dependsOn[i]);
+            }
+
             Nova.$on("nova-belongsto-depend-" + this.field.dependsOn, function () {
                 var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(dependsOnValue) {
                     return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
@@ -1074,19 +1091,21 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                     });
 
                                     if (!(dependsOnValue && dependsOnValue.value)) {
-                                        _context.next = 7;
+                                        _context.next = 10;
                                         break;
                                     }
 
-                                    _context.next = 5;
+                                    _this2.updateDependsMap(dependsOnValue);
+
+                                    _context.next = 6;
                                     return Nova.request().post("/nova-vendor/nova-belongsto-depend", {
                                         resourceClass: _this2.field.resourceParentClass,
                                         modelClass: dependsOnValue.field.modelClass,
                                         attribute: _this2.field.attribute,
-                                        dependKey: dependsOnValue.value[dependsOnValue.field.modelPrimaryKey]
+                                        dependsMap: _this2.field.dependsMap
                                     });
 
-                                case 5:
+                                case 6:
                                     _this2.options = _context.sent.data;
 
 
@@ -1099,8 +1118,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                             field: _this2.field
                                         });
                                     }
+                                    _context.next = 11;
+                                    break;
 
-                                case 7:
+                                case 10:
+                                    _this2.cleanupDependsMap(dependsOnValue);
+
+                                case 11:
                                 case "end":
                                     return _context.stop();
                             }
@@ -1117,6 +1141,35 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
     methods: {
+        updateDependsMap: function updateDependsMap(dependsOnValue) {
+            var exists = false;
+            var index = -1;
+
+            for (var i = 0; i < this.field.dependsMap.length; i++) {
+                if (this.field.dependsMap[i].key === dependsOnValue.field.modelClass) {
+
+                    exists = true;
+                    index = i;
+                    break;
+                }
+            }
+
+            if (exists) {
+                this.field.dependsMap[index].value = dependsOnValue.value[dependsOnValue.field.modelPrimaryKey];
+            } else {
+                this.field.dependsMap.push({
+                    key: dependsOnValue.field.modelClass,
+                    value: dependsOnValue.value[dependsOnValue.field.modelPrimaryKey]
+                });
+            }
+        },
+        cleanupDependsMap: function cleanupDependsMap(dependsOnValue) {
+            for (var i = 0; i < this.field.dependsMap.length; i++) {
+                if (this.field.dependsMap[i].key === dependsOnValue.field.modelClass) {
+                    this.field.dependsMap.splice(i, 1);
+                }
+            }
+        },
         customLabel: function customLabel(item) {
             return item[this.field.titleKey];
         },
