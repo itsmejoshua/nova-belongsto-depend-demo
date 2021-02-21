@@ -8,8 +8,8 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "build-nova-belongsto-depend": "cd nova-components/NovaBelongstoDepend && npm run dev",
-        "build-nova-belongsto-depend-prod": "cd nova-components/NovaBelongstoDepend && npm run prod"
+        "build-nova-belongsto-depend": "cd nova-components/NovaBelongsToDepend && npm run dev",
+        "build-nova-belongsto-depend-prod": "cd nova-components/NovaBelongsToDepend && npm run prod"
     },
     "devDependencies": {
         "axios": "^0.21",

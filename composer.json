@@ -14,7 +14,7 @@
         },
         {
             "type": "path",
-            "url": "./nova-components/NovaBelongstoDepend"
+            "url": "./nova-components/NovaBelongsToDepend"
         }
     ],
     "require": {
