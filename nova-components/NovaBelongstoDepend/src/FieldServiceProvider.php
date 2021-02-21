@@ -1,10 +1,11 @@
 <?php
 
-namespace Orlyapps\NovaBelongstoDepend;
+namespace Orlyapps\NovaBelongsToDepend;
 
-use Illuminate\Support\ServiceProvider;
-use Laravel\Nova\Events\ServingNova;
 use Laravel\Nova\Nova;
+use Laravel\Nova\Events\ServingNova;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Route;
 
 class FieldServiceProvider extends ServiceProvider
 {
@@ -16,8 +17,12 @@ class FieldServiceProvider extends ServiceProvider
     public function boot()
     {
         Nova::serving(function (ServingNova $event) {
-            Nova::script('nova-belongsto-depend', __DIR__.'/../dist/js/field.js');
-            Nova::style('nova-belongsto-depend', __DIR__.'/../dist/css/field.css');
+            Nova::script('nova-belongsto-depend', __DIR__ . '/../dist/js/field.js');
+            Nova::style('nova-belongsto-depend', __DIR__ . '/../dist/css/field.css');
+        });
+
+        $this->app->booted(function () {
+            $this->routes();
         });
     }
 
@@ -29,5 +34,21 @@ class FieldServiceProvider extends ServiceProvider
     public function register()
     {
         //
+    }
+
+    /**
+     * Register the tool's routes.
+     *
+     * @return void
+     */
+    protected function routes()
+    {
+        if ($this->app->routesAreCached()) {
+            return;
+        }
+
+        Route::middleware(['nova'])
+                ->prefix('nova-vendor/nova-belongsto-depend')
+                ->group(__DIR__ . '/../routes/api.php');
     }
 }

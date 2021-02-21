@@ -11,13 +11,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Orlyapps\\NovaBelongstoDepend\\": "src/"
+            "Orlyapps\\NovaBelongsToDepend\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Orlyapps\\NovaBelongstoDepend\\FieldServiceProvider"
+                "Orlyapps\\NovaBelongsToDepend\\FieldServiceProvider"
             ]
         }
     },
