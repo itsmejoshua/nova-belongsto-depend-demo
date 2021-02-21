@@ -924,7 +924,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.card.overflow-hidden {\r\n    overflow: visible !important;\n}\n.multiselect {\r\n    -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);\r\n            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);\r\n    min-height: 36px !important;\r\n    border-radius: 0.5rem;\n}\n.multiselect__tags {\r\n    min-height: 36px !important;\r\n    border: 1px solid var(--60) !important;\r\n    color: var(--80);\r\n    border-radius: 0.5rem !important;\n}\n.multiselect__select {\r\n    background-repeat: no-repeat;\r\n    background-size: 10px 6px;\r\n    background-position: center right 0.75rem;\r\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 10 6\"><path fill=\"#35393C\" fill-rule=\"nonzero\" d=\"M8.293.293a1 1 0 0 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4A1 1 0 0 1 1.707.293L5 3.586 8.293.293z\"/></svg>');\n}\n.multiselect__select:before {\r\n    content: none !important;\n}\r\n", ""]);
+exports.push([module.i, "\n.card.overflow-hidden {\n    overflow: visible !important;\n}\n.multiselect {\n    -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);\n            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);\n    min-height: 36px !important;\n    border-radius: 0.5rem;\n}\n.multiselect__tags {\n    min-height: 36px !important;\n    border: 1px solid var(--60) !important;\n    color: var(--80);\n    border-radius: 0.5rem !important;\n}\n.multiselect__select {\n    background-repeat: no-repeat;\n    background-size: 10px 6px;\n    background-position: center right 0.75rem;\n    background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 10 6\"><path fill=\"#35393C\" fill-rule=\"nonzero\" d=\"M8.293.293a1 1 0 0 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4A1 1 0 0 1 1.707.293L5 3.586 8.293.293z\"/></svg>');\n}\n.multiselect__select:before {\n    content: none !important;\n}\n", ""]);
 
 // exports
 
@@ -1074,10 +1074,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             var $busEvents = [];
 
             for (var i = 0; i < this.field.dependsOn.length; i++) {
-                $busEvents.push("depend-field-" + this.field.dependsOn[i]);
+                $busEvents.push("nova-belongsto-depend-" + this.field.dependsOn[i]);
             }
 
-            Nova.$on("nova-belongsto-depend-" + this.field.dependsOn, function () {
+            Nova.$on($busEvents, function () {
                 var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(dependsOnValue) {
                     return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                         while (1) {
