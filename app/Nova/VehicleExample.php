@@ -50,21 +50,16 @@ class VehicleExample extends Resource
                     return $classification->brands()->get(['brands.id', 'brands.name']);
                 })
                 ->dependsOn('classification'),
-            NovaBelongsToDepend::make('Model', 'model', VehicleModel::class)
-                ->optionsResolve(function ($brand) {
-                    return $brand->models()->get(['vehicle_models.id', 'vehicle_models.name']);
-                })
-                ->dependsOn('brand')
-                ->sortable(),
+
             // Preparation for the pull request. Depend on several models.
-/*            NovaBelongsToDepend::make('Model', 'model', VehicleModel::class)
+            NovaBelongsToDepend::make('Model', 'model', VehicleModel::class)
                 ->optionsResolve(function ($depends) {
                     return \App\Models\VehicleModel::query()
                         ->where('classification_id', $depends->classification->id)
                         ->where('brand_id', $depends->brand->id)
                         ->get();
                 })
-                ->dependsOn('classification', 'brand'),*/
+                ->dependsOn('classification', 'brand'),
         ];
     }
 
