@@ -25,7 +25,7 @@
         "laravel/framework": "^8.12",
         "laravel/nova": "~3.0",
         "laravel/tinker": "^2.5",
-        "orlyapps/nova-belongsto-depend": "dev-test/81-depend-on-several-fields"
+        "orlyapps/nova-belongsto-depend": "@dev"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
