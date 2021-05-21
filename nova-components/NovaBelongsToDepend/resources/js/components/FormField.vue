@@ -108,20 +108,28 @@ export default {
     },
 
     beforeDestroy() {
-      if (this.field.dependsOn) {
+        if (this.field.dependsOn) {
 
-        let $busEvents = [];
+            if (!(this.field.dependsOn instanceof Array)) {
+                throw new TypeError('dependsOn must be an array. Please use NovaBelongsToDepend::dependsOn Method')
+            }
 
-        for (let i = 0; i < this.field.dependsOn.length; i++) {
-          $busEvents.push("nova-belongsto-depend-" + this.field.dependsOn[i]);
+            let $busEvents = [];
+
+            for (let i = 0; i < this.field.dependsOn.length; i++) {
+                $busEvents.push("nova-belongsto-depend-" + this.field.dependsOn[i]);
+            }
+
+            Nova.$off($busEvents);
         }
-
-        Nova.$off($busEvents);
-      }
     },
 
     created() {
         if (this.field.dependsOn) {
+
+            if (!(this.field.dependsOn instanceof Array)) {
+                throw new TypeError('dependsOn must be an array. Please use NovaBelongsToDepend::dependsOn Method')
+            }
 
             let $busEvents = [];
 

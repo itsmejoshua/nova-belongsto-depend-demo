@@ -1057,6 +1057,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     beforeDestroy: function beforeDestroy() {
         if (this.field.dependsOn) {
 
+            if (!(this.field.dependsOn instanceof Array)) {
+                throw new TypeError('dependsOn must be an array. Please use NovaBelongsToDepend::dependsOn Method');
+            }
+
             var $busEvents = [];
 
             for (var i = 0; i < this.field.dependsOn.length; i++) {
@@ -1070,6 +1074,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         var _this2 = this;
 
         if (this.field.dependsOn) {
+
+            if (!(this.field.dependsOn instanceof Array)) {
+                throw new TypeError('dependsOn must be an array. Please use NovaBelongsToDepend::dependsOn Method');
+            }
 
             var $busEvents = [];
 
