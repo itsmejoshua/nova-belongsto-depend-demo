@@ -1028,7 +1028,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
         /** Determine if we are creating a new resource via a parent relation */
         creatingViaRelatedResource: function creatingViaRelatedResource() {
-            return this.viaResource == this.field.resourceName && typeof this.viaResourceId !== "undefined";
+            return this.viaResource == this.field.resourceName && typeof this.viaResourceId !== "undefined" && this.field.reverse;
         },
         showSelect: function showSelect() {
             return !this.field.fallback || this.options.length !== 0;

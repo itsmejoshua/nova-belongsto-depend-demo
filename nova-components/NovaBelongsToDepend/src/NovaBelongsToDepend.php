@@ -95,17 +95,17 @@ class NovaBelongsToDepend extends BelongsTo
         return $this;
     }
 
-  /**
-   * @param $parentResourceClass
-   * @return self
-   */
-  public function setResourceParentClass($parentResourceClass)
-  {
-    $this->resourceParentClass = $parentResourceClass;
-    return $this;
-  }
+    /**
+     * @param $parentResourceClass
+     * @return self
+     */
+    public function setResourceParentClass($parentResourceClass)
+    {
+        $this->resourceParentClass = $parentResourceClass;
+        return $this;
+    }
 
-  public function hideLinkToResourceFromDetail()
+    public function hideLinkToResourceFromDetail()
     {
         $this->showLinkToResourceFromDetail = false;
         return $this;
@@ -165,8 +165,8 @@ class NovaBelongsToDepend extends BelongsTo
     /**
      * Hydrate the given attribute on the model based on the incoming request.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
-     * @param  object  $model
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
+     * @param object $model
      * @return mixed
      */
     public function fillForAction(NovaRequest $request, $model)
