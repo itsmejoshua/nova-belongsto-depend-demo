@@ -6,9 +6,8 @@
 
 ## Install Nova Belongsto Depend Demo
 
-    git clone git@github.com:orlyapps/nova-belongsto-depend-demo.git nova-belongsto-depend-demo
+    git clone git@github.com:itsmejoshua/nova-belongsto-depend-demo.git nova-belongsto-depend-demo
     cd ./nova-belongsto-depend-demo
-    cp .env.example .env
     php artisan key:generate
     composer install
     npm install
